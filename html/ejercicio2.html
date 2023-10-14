@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="AbrahanBadel">
+    <title>Ejemplo JS # 1</title>
+    <script src="../Js/utilidades.js"></script>
+</head>
+<body>
+    <script>
+
+        var h1 = crearNodoTexto("h1", "+6 products with 25% descount BUY NOW..!");
+        adicionarNodoBody(h1);
+
+        var hr = crearNodo("hr");
+        adicionarNodoBody(hr);
+
+        var div = crearNodo("div");
+        div.id = "tablaContainer"
+        adicionarNodoBody(div);
+
+        var tabla = crearTabla(2, 3);
+
+        for (var i = 0; i < tabla.rows.length; i++) {
+            var fila = tabla.rows[i];
+            for (var j = 0; j < fila.cells.length; j++) {
+                var celda = fila.cells[j];
+
+                // Crea una imagen
+        
+                var img = crearNodoImagen("#", "imagen decorativa");
+        adicionarNodoBody(img);
+
+                // Crea botones
+                var botonComprar = crearNodo("button");
+                botonComprar.textContent = "COMPRAR";
+
+                var botonMasInfo = crearNodo("button");
+                botonMasInfo.textContent = "MAS INFORMACIÓN";
+
+                var botonAgregarCarrito = crearNodo("button");
+                botonAgregarCarrito.textContent = "AÑADIR AL CARRITO";
+
+                // Agrega los elementos a la celda
+                celda.appendChild(img);
+                celda.appendChild(document.createElement("br")); // Agrega un salto de línea
+                celda.appendChild(botonComprar);
+                celda.appendChild(botonMasInfo);
+                celda.appendChild(botonAgregarCarrito);
+            }
+        }
+        var tablaContainer = document.getElementById("tablaContainer");
+        tablaContainer.appendChild(tabla);
+
+    </script>
+</body>
+</html>
