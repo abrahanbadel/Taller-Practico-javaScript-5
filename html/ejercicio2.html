@@ -7,53 +7,86 @@
     <meta name="author" content="AbrahanBadel">
     <title>Ejemplo JS # 1</title>
     <script src="../Js/utilidades.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
     <script>
 
-        var h1 = crearNodoTexto("h1", "+6 products with 25% descount BUY NOW..!");
+        var h1 = crearNodoTexto("h1", "6 products with 25% descount BUY NOW..!");
         adicionarNodoBody(h1);
 
         var hr = crearNodo("hr");
         adicionarNodoBody(hr);
 
-        var div = crearNodo("div");
-        div.id = "tablaContainer"
-        adicionarNodoBody(div);
-
-        var tabla = crearTabla(2, 3);
-
-        for (var i = 0; i < tabla.rows.length; i++) {
-            var fila = tabla.rows[i];
-            for (var j = 0; j < fila.cells.length; j++) {
-                var celda = fila.cells[j];
-
-                // Crea una imagen
-        
-                var img = crearNodoImagen("#", "imagen decorativa");
-        adicionarNodoBody(img);
-
-                // Crea botones
-                var botonComprar = crearNodo("button");
-                botonComprar.textContent = "COMPRAR";
-
-                var botonMasInfo = crearNodo("button");
-                botonMasInfo.textContent = "MAS INFORMACIÓN";
-
-                var botonAgregarCarrito = crearNodo("button");
-                botonAgregarCarrito.textContent = "AÑADIR AL CARRITO";
-
-                // Agrega los elementos a la celda
-                celda.appendChild(img);
-                celda.appendChild(document.createElement("br")); // Agrega un salto de línea
-                celda.appendChild(botonComprar);
-                celda.appendChild(botonMasInfo);
-                celda.appendChild(botonAgregarCarrito);
+        function crearNodo(tipoNodo, atributos) {
+            var nodo = document.createElement(tipoNodo);
+            if (atributos) {
+                for (var key in atributos) {
+                    if (atributos.hasOwnProperty(key)) {
+                        nodo.setAttribute(key, atributos[key]);
+                    }
+                }
             }
+            return nodo;
         }
-        var tablaContainer = document.getElementById("tablaContainer");
-        tablaContainer.appendChild(tabla);
+
+        function crearTabla(imagenes) {
+    var tabla = crearNodo("table");
+
+    for (var i = 0; i < 2; i++) {
+        var fila = crearNodo("tr");
+
+        for (var j = 0; j < 3; j++) {
+            var celda = crearNodo("td");
+
+            // Crea una imagen en cada celda
+            var imagen = crearNodo("img", {
+                src: imagenes[i * 3 + j],
+                alt: "Imagen " + (i * 3 + j + 1)
+            });
+
+            // Crea tres botones en cada celda
+            var comprarButton = crearBoton("Comprar");
+            var agregarAlCarroButton = crearBoton("Agregar al Carro");
+            var detallesButton = crearBoton("Mas Detalles");
+
+            // Agrega la imagen y los botones a la celda
+            celda.appendChild(imagen);
+            celda.appendChild(comprarButton);
+            celda.appendChild(agregarAlCarroButton);
+            celda.appendChild(detallesButton);
+
+            fila.appendChild(celda);
+        }
+        tabla.appendChild(fila);
+    }
+
+    return tabla;
+}
+
+// Función para crear un botón con un texto
+function crearBoton(texto) {
+    var boton = crearNodo("button");
+    boton.innerText = texto;
+    return boton;
+}
+
+        var imagenes = [
+            "../recursos/silla.png",
+            "../recursos/bici.png",
+            "../recursos/caja de herramientas.png",
+            "../recursos/escritorio electrico.png",
+            "../recursos/nevera.png",
+            "../recursos/portatil.png",
+        ];
+
+        var tabla = crearTabla(imagenes);
+
+        document.body.appendChild(tabla);
 
     </script>
+
 </body>
+
 </html>

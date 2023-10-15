@@ -17,15 +17,6 @@ function adicionarNodoBody(nodo) {
     document.body.appendChild(nodo);
 }
 
-function crearNodoImagen(url, alt) {
-    var nodo = crearNodo("img");
-    nodo.src = url;
-    nodo.alt = alt;
-    nodo.width = 300;
-
-    return nodo;
-}
-
 function adicionarNodoContenedor(contenedor, nodo) {
     contenedor.appendChild(nodo);
 }
@@ -35,7 +26,7 @@ function crearNodoA(texto, href) {
     nodo.href = href
     return nodo;
 }
-//---------------------------------------------------------------
+
 function crearTabla(filas, columnas) {
     var tabla = crearNodo("table");
     for (var i = 0; i < filas; i++) {
